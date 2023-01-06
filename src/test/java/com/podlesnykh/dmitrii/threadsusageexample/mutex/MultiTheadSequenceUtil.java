@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class MultiTheadSequenceUtil {
 
-    public static final int COUNT_ITERATIONS = 10_000;
+    public static final int COUNT_ITERATIONS = 1_000_000;
 
     public Set<Integer> getUniqueSequences(final SequenceGenerator sequenceGenerator,
                                            final int count) throws InterruptedException, ExecutionException {
