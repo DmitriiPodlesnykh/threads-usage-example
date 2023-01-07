@@ -1,21 +1,31 @@
 package com.podlesnykh.dmitrii.threadsusageexample.mutex;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
+import static com.podlesnykh.dmitrii.threadsusageexample.mutex.MultiTheadSequenceUtil.COUNT_ITERATIONS;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SequenceGeneratorUsingSynchronizedMethodTest {
 
+    private SequenceGeneratorUsingSynchronizedMethod sut;
+
+    private MultiTheadSequenceUtil multiTheadSequenceUtil;
+
+    @BeforeEach
+    public void setUp() {
+        sut = new SequenceGeneratorUsingSynchronizedMethod();
+        multiTheadSequenceUtil = new MultiTheadSequenceUtil();
+    }
+
     @Test
     void getNextSequence() throws ExecutionException, InterruptedException {
-        int count = 10_000;
 
-        MultiTheadSequenceUtil multiTheadSequenceUtil = new MultiTheadSequenceUtil();
-        Set<Integer> integers
-                = multiTheadSequenceUtil.getUniqueSequences(new SequenceGeneratorUsingSynchronizedMethod(), count);
-        assertEquals(count, integers.size());
+        Set<Integer> integers = multiTheadSequenceUtil.getUniqueSequences(sut, COUNT_ITERATIONS);
+
+        assertEquals(COUNT_ITERATIONS, integers.size());
     }
 }

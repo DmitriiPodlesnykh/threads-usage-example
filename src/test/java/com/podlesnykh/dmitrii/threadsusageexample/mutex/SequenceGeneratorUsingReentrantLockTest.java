@@ -9,15 +9,15 @@ import java.util.concurrent.ExecutionException;
 import static com.podlesnykh.dmitrii.threadsusageexample.mutex.MultiTheadSequenceUtil.COUNT_ITERATIONS;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SequenceGeneratorTest {
+class SequenceGeneratorUsingReentrantLockTest {
 
-    private SequenceGenerator sut;
+    private SequenceGeneratorUsingReentrantLock sut;
 
     private MultiTheadSequenceUtil multiTheadSequenceUtil;
 
     @BeforeEach
     public void setUp() {
-        sut = new SequenceGenerator();
+        sut = new SequenceGeneratorUsingReentrantLock();
         multiTheadSequenceUtil = new MultiTheadSequenceUtil();
     }
 
@@ -26,6 +26,6 @@ class SequenceGeneratorTest {
 
         Set<Integer> integers = multiTheadSequenceUtil.getUniqueSequences(sut, COUNT_ITERATIONS);
 
-        assertNotEquals(COUNT_ITERATIONS, integers.size());
+        assertEquals(COUNT_ITERATIONS, integers.size());
     }
 }
